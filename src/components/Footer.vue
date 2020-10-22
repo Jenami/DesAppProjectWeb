@@ -4,7 +4,7 @@
         <div class="row center">
             <div class="col l4 s12 ">
             <h5 class="white-text">DesApp</h5>
-            <p class="grey-text text-lighten-4">Proyecto de la materia Desarrollo de Aplicaciones.</p>
+            <p class="grey-text text-lighten-4">Proyecto de la materia Desarrollo de Aplicaciones</p>
 
 
             </div>
@@ -17,10 +17,10 @@
             <div class="col l4 s12">
             <h5 class="white-text">Github</h5>
             <ul>
-                <li><a class="white-text" href="https://github.com/SanchezSDario/DesAppProject/tree/master">Link al repo (back)</a></li>
+                <li><a class="white-text" href="https://github.com/SanchezSDario/DesAppProject/">Backend</a></li>
             </ul>
             <ul>
-                <li><a class="white-text" href="!#">Link al repo (front)</a></li>
+                <li><a class="white-text" href="https://github.com/Jenami/DesAppProjectWeb/">Frontend</a></li>
             </ul>
             </div>
         </div>

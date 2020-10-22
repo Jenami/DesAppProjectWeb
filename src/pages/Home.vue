@@ -14,9 +14,48 @@
       </div>
     </div>
     
+    <div class="blue lighten-4">
+      <div class="container">
+        <div class="section">
+          <div class="row">
+            <div class="col s12 m6 ">
+              <h5>Proyectos </h5>
+              <ul class="collapsible" v-for="p in projectsNotEnding" :key="p.id">
+                  <li>
+                    <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
+                    <div class="collapsible-body">
+                      <ul>
+                        <li>Nombre:{{p.name}}</li>
+                        <li>Fecha de inicio:{{p.startDate}}</li>
+                        <li>Fecha de fin:{{p.endDate}}</li>
+                      </ul>
+                    </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col s12 m6">
+              <h5>Proyectos por cerrar</h5>
+              <ul class="collapsible" v-for="p in projectsEnding" :key="p.id">
+                <li>
+                  <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
+                  <div class="collapsible-body">
+                    <ul>
+                      <li>Nombre:{{p.name}}</li>
+                      <li>Fecha de inicio:{{p.startDate}}</li>
+                      <li>Fecha de fin:{{p.endDate}}</li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="container">
-      <ul class="collapsible" v-for="p in projectsAll" :key="p.id">
+
+      <div class="container ">
+        <h5>Todos los proyetos</h5>
+        <ul class="collapsible" v-for="p in projectsAll" :key="p.id">
           <li>
             <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
             <div class="collapsible-body">
@@ -29,18 +68,11 @@
               </ol>
             </div>
           </li>
-      </ul>
-    </div>
-
-      Projects Ending:
-      {{projectsEnding}}
-      <br/>
-      Projects Not Ending:
-      {{projectsNotEnding}}
-      <br/>
-
-      Cities:
-      {{cities}}
+        </ul>
+      </div>
+    
+     
+      <!--  Cities:{{cities}}-->
   
     <br/>
     <div class="container">
@@ -63,6 +95,7 @@
               </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -107,9 +140,9 @@ export default {
             let day = dateParts[2];
             let dateProject = new Date(year, month-1, day);
             let dateActual = new Date();
-            if(dateProject.month == dateActual.month){
-              this.projectsEnding.push(element);
+            if(dateProject.getMonth() === dateActual.getMonth()){
               console.log('Actual');
+              this.projectsEnding.push(element);
             } else{
               console.log('Not actual');
               this.projectsNotEnding.push(element);
@@ -119,9 +152,7 @@ export default {
       .catch(e => console.log('error:'+e));
   },
   updated(){
-    $(document).ready(function(){
         $('.collapsible').collapsible();
-      });
   },
   methods:{
     goHome() {

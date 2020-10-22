@@ -1,19 +1,31 @@
 <template>
-  <div class="container">
-    <ul class="collapsible" v-for="p in projectsAll" :key="p.id">
-        <li>
-          <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
-          <div class="collapsible-body">
-            <ol>
-              <li>{{p.name}}</li>
-              
-              <li>{{p.startDate}}</li>
-              
-              <li>{{p.endDate}}</li>
-            </ol>
+  <div id="backg">
+    <div class="container">
+      <div class="section">
+      <div class="row">
+        <div class="col s12 m4" v-for="p in projectsAll" :key="p.id">
+          <div class="card blue-grey lighten-">
+            <div class="card-content white-text">
+                <span class="card-title"><b>{{p.name}}</b></span>
+           
+                <ul>
+                  <li>Nombre: {{p.name}}</li>
+                    
+                    
+                    <li>Porcentaje: {{p.minClosingPercentage}}</li>
+                    <li>Fecha de inicio: {{p.startDate}}</li>
+                    
+                    <li>Fecha de cierre:{{p.endDate}}</li>
+                </ul>
+            </div>
+            <div class="card-action white">
+              <a class=" blue-text" href="#">Donar</a>
+            </div>
           </div>
-        </li>
-    </ul>
+        </div>
+      </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,12 +52,15 @@ export default {
       .catch(e => console.log('error:'+e));
   },
   updated(){
-    $(document).ready(function(){
         $('.collapsible').collapsible();
-      });
   }
 }
 </script>
 
 <style lang="css" scoped>
+#backg{
+  background-image: url("../assets/blue-dots.jpg");
+  background-repeat:repeat;
+  background-size:contain ;
+}
 </style>
