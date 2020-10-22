@@ -16,8 +16,7 @@
     
 
     <div class="container">
-      <ul class="collapsible">
-        <div v-for="p in projectsAll" :key="p.id">
+      <ul class="collapsible" v-for="p in projectsAll" :key="p.id">
           <li>
             <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
             <div class="collapsible-body">
@@ -30,8 +29,8 @@
               </ol>
             </div>
           </li>
-        </div>
       </ul>
+    </div>
 
       Projects Ending:
       {{projectsEnding}}
@@ -42,7 +41,6 @@
 
       Cities:
       {{cities}}
-  </div>
   
     <br/>
     <div class="container">
@@ -69,8 +67,8 @@
   </div>
 </template>
 
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
-
 import axios from 'axios';
 
 export default {
@@ -81,26 +79,28 @@ export default {
   components:{ 
   },
   data(){
-    
     return {
       cities: null,
       projectsEnding: [],
-      projectsNotEnding: []
+      projectsNotEnding: [],
+      projectsAll: []
     }
   },
   mounted () {
-    console.log('Mounted FirstPage')
+    console.log('Mounted FirstPage');
     axios
       .get('https://desapp-back-master.herokuapp.com/api/cities')
-      .then(response => (this.cities = response.data))
-      .catch(e=>console.log('error:'+e));
+      .then(response => this.cities = response.data)
+      .catch(e => console.log('error:'+e));
     
     
     axios.get('https://desapp-back-master.herokuapp.com/api/projects')
-      .then(response => (response.data.forEach(
+      .then(response => {
+        this.projectsAll = response.data;
+        response.data.forEach(
           element => {
-            console.log('elem:'+element)
-            let dateString = element.endDate
+            console.log('elem:'+element);
+            let dateString = element.endDate;
             let dateParts = dateString.split('-');
             let year = dateParts[0];
             let month = dateParts[1];
@@ -109,15 +109,19 @@ export default {
             let dateActual = new Date();
             if(dateProject.month == dateActual.month){
               this.projectsEnding.push(element);
-            }
-            else{
+              console.log('Actual');
+            } else{
+              console.log('Not actual');
               this.projectsNotEnding.push(element);
             }
-          })
-        )
-      .catch(e=>console.log('error:'+e))
-      )
-    
+          });
+      })
+      .catch(e => console.log('error:'+e));
+  },
+  updated(){
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+      });
   },
   methods:{
     goHome() {
