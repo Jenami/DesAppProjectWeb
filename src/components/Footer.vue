@@ -1,20 +1,20 @@
 <template>
   <footer class="page-footer indigo">
     <div class="container" id="container90">
-        <div class="row center">
-            <div class="col l4 s12 ">
+      <div class="row center">
+          <div class="col l4 s12 ">
             <h5 class="white-text">DesApp</h5>
             <p class="grey-text text-lighten-4">Proyecto de la materia Desarrollo de Aplicaciones</p>
-
-
-            </div>
-            <div class="col l4 s12">
+          </div>
+          
+          <div class="col l4 s12">
             <h5 class="white-text">Pagina de la materia</h5>
             <ul>
                 <li><a class="white-text" href="https://sites.google.com/view/unq-desarrollo-de-aplicaciones">Desarrollo de Aplicaciones - UNQ</a></li>
             </ul>
-            </div>
-            <div class="col l4 s12">
+          </div>
+          
+          <div class="col l4 s12">
             <h5 class="white-text">Github</h5>
             <ul>
                 <li><a class="white-text" href="https://github.com/SanchezSDario/DesAppProject/">Backend</a></li>
@@ -22,8 +22,8 @@
             <ul>
                 <li><a class="white-text" href="https://github.com/Jenami/DesAppProjectWeb/">Frontend</a></li>
             </ul>
-            </div>
-        </div>
+          </div>
+      </div>
     </div>
     <div class="footer-copyright">
       <div class="container ">

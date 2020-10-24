@@ -7,15 +7,11 @@
           <div class="card blue-grey lighten-">
             <div class="card-content white-text">
                 <span class="card-title"><b>{{p.name}}</b></span>
-           
                 <ul>
                   <li>Nombre: {{p.name}}</li>
-                    
-                    
-                    <li>Porcentaje: {{p.minClosingPercentage}}</li>
-                    <li>Fecha de inicio: {{p.startDate}}</li>
-                    
-                    <li>Fecha de cierre:{{p.endDate}}</li>
+                  <li>Porcentaje: {{p.minClosingPercentage}}</li>
+                  <li>Fecha de inicio: {{p.startDate}}</li>
+                  <li>Fecha de cierre:{{p.endDate}}</li>
                 </ul>
             </div>
             <div class="card-action white">
@@ -52,7 +48,7 @@ export default {
       .catch(e => console.log('error:'+e));
   },
   updated(){
-        $('.collapsible').collapsible();
+        $('.collapsible').collapsible();  
   }
 }
 </script>

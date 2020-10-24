@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import App from './App.vue';
 import VueRouter from 'vue-router'
+import {store} from './store';
+
 Vue.use(VueRouter)
 Vue.use(VueI18n)
 
@@ -23,6 +25,7 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  i18n,  
-  render: h => h(App),
+  i18n,
+  store,
+  render: h => h(App)
 }).$mount('#app')

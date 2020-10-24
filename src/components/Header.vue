@@ -3,9 +3,9 @@
     <nav class="indigo" role="navigation">
         <div class="nav-wrapper ">
             <ul class=" left hide-on-med-and-down">
-            <li><router-link to="/">Home</router-link></li>
-            <li><router-link to="/about">Localidades</router-link></li>
-            <li><router-link to="/projects">Proyectos</router-link></li>
+                <li><router-link to="/">Home</router-link></li>
+                <li><router-link to="/about">Localidades</router-link></li>
+                <li><router-link to="/projects">Proyectos</router-link></li>
             </ul>
      
             <ul class=" right hide-on-med-and-down">
@@ -18,12 +18,12 @@
                 <li><router-link to="/">Home</router-link></li>
                 <li><router-link to="/about">Localidades</router-link></li>
                 <li><router-link to="/about">Proyectos</router-link></li>
+                
                 <div class="divider"></div>
                 
                 <li><a href="#">Login</a></li>
                 <li><a @click="changeLang('es')">ES</a></li>
                 <li><a @click="changeLang('en')">EN</a></li>
-
             </ul>
             <a href="#" data-target="nav-mobile" class="right sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+
 export default {
     name: 'Header',
     data(){
@@ -44,10 +45,8 @@ export default {
             }
         }
     }
-    
 }
 </script>
-
 
 <style>
 

@@ -52,7 +52,6 @@
         </div>
       </div>
 
-
       <div class="container ">
         <h5>Todos los proyetos</h5>
         <ul class="collapsible" v-for="p in projectsAll" :key="p.id">
@@ -61,9 +60,7 @@
             <div class="collapsible-body">
               <ol>
                 <li>{{p.name}}</li>
-                
                 <li>{{p.startDate}}</li>
-                
                 <li>{{p.endDate}}</li>
               </ol>
             </div>
@@ -71,37 +68,36 @@
         </ul>
       </div>
     
-     
       <!--  Cities:{{cities}}-->
   
-    <br/>
-    <div class="container">
-      <div class="row center">
-        
-          <button class="btn-large waves-effect blue white-text waves-light lighten-1" @click="goHome" >Button test home</button>
+      <br/>
     
-          <button class="btn-large waves-effect blue white-text waves-light lighten-1" @click="goAbout" >Button test other page</button>
-        
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="section">
-        <div class="row">
-          <div class="col s12 center">
-            <h3><i class="mdi-content-send brown-text"></i></h3>
-            <h4>Test i18n</h4>
-            <p>{{ $t("message.hello") }}</p>
-              </div>
+      <div class="container">
+        <div class="row center">
+            <button class="btn-large waves-effect blue white-text waves-light lighten-1" @click="goHome" >Button test home</button>
+    
+            <button class="btn-large waves-effect blue white-text waves-light lighten-1" @click="goAbout" >Button test other page</button>
         </div>
       </div>
-    </div>
+
+      <div class="container">
+        <div class="section">
+          <div class="row">
+            <div class="col s12 center">
+              <h3><i class="mdi-content-send brown-text"></i></h3>
+              <h4>Test i18n</h4>
+              <p>{{ $t("message.hello") }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
+
 import axios from 'axios';
 
 export default {
@@ -109,8 +105,6 @@ export default {
   props: [
     'msg'
   ],
-  components:{ 
-  },
   data(){
     return {
       cities: null,
@@ -120,7 +114,6 @@ export default {
     }
   },
   mounted () {
-    console.log('Mounted FirstPage');
     axios
       .get('https://desapp-back-master.herokuapp.com/api/cities')
       .then(response => this.cities = response.data)
@@ -132,7 +125,6 @@ export default {
         this.projectsAll = response.data;
         response.data.forEach(
           element => {
-            console.log('elem:'+element);
             let dateString = element.endDate;
             let dateParts = dateString.split('-');
             let year = dateParts[0];
@@ -141,13 +133,17 @@ export default {
             let dateProject = new Date(year, month-1, day);
             let dateActual = new Date();
             if(dateProject.getMonth() === dateActual.getMonth()){
-              console.log('Actual');
               this.projectsEnding.push(element);
-            } else{
-              console.log('Not actual');
+            } else {
               this.projectsNotEnding.push(element);
             }
           });
+      })
+      .catch(e => console.log('error:'+e));
+  
+    axios.get('https://desapp-back-master.herokuapp.com/api/users')
+      .then(response => {
+        this.$store.state.user = response.data[0];
       })
       .catch(e => console.log('error:'+e));
   },
@@ -160,12 +156,10 @@ export default {
     },
     goAbout() {
       this.$router.push('/about');
-    },
+    }
   }
 }
 </script>
-
-
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
