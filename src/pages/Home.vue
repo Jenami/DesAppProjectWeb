@@ -144,6 +144,7 @@ export default {
     axios.get('https://desapp-back-master.herokuapp.com/api/users')
       .then(response => {
         this.$store.state.user = response.data[0];
+        console.log('Loaded user');
       })
       .catch(e => console.log('error:'+e));
   },
