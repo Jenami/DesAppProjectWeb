@@ -23,7 +23,7 @@
               <ul class="collapsible" v-for="p in projectsNotEnding" :key="p.id">
                   <li>
                     <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
-                    <div class="collapsible-body">
+                    <div class="collapsible-body white">
                       <ul>
                         <li>Nombre:{{p.name}}</li>
                         <li>Fecha de inicio:{{p.startDate}}</li>
@@ -38,7 +38,7 @@
               <ul class="collapsible" v-for="p in projectsEnding" :key="p.id">
                 <li>
                   <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
-                  <div class="collapsible-body">
+                  <div class="collapsible-body white">
                     <ul>
                       <li>Nombre:{{p.name}}</li>
                       <li>Fecha de inicio:{{p.startDate}}</li>
@@ -57,7 +57,7 @@
         <ul class="collapsible" v-for="p in projectsAll" :key="p.id">
           <li>
             <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
-            <div class="collapsible-body">
+            <div class="collapsible-body white">
               <ol>
                 <li>{{p.name}}</li>
                 <li>{{p.startDate}}</li>

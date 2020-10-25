@@ -3,9 +3,12 @@ import VueI18n from 'vue-i18n';
 import App from './App.vue';
 import VueRouter from 'vue-router'
 import {store} from './store';
+import ProjectCard from './components/ProjectCard.vue';
 
 Vue.use(VueRouter)
 Vue.use(VueI18n)
+
+Vue.component('ProjectCard', ProjectCard);
 
 //I 18 N
 import messages from './translations.js';

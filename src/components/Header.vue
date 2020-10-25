@@ -6,6 +6,7 @@
                 <li><router-link to="/">Home</router-link></li>
                 <li><router-link to="/about">Localidades</router-link></li>
                 <li><router-link to="/projects">Proyectos</router-link></li>
+                <li><router-link to="/profile">Perfil</router-link></li>
             </ul>
      
             <ul class=" right hide-on-med-and-down">
@@ -17,7 +18,8 @@
             <ul id="nav-mobile" class=" sidenav">
                 <li><router-link to="/">Home</router-link></li>
                 <li><router-link to="/about">Localidades</router-link></li>
-                <li><router-link to="/about">Proyectos</router-link></li>
+                <li><router-link to="/projects">Proyectos</router-link></li>
+                <li><router-link to="/profile">Perfil</router-link></li>
                 
                 <div class="divider"></div>
                 

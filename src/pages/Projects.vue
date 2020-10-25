@@ -2,24 +2,10 @@
   <div id="backg">
     <div class="container">
       <div class="section">
-      <div class="row">
-        <div class="col s12 m4" v-for="p in projectsAll" :key="p.id">
-          <div class="card blue-grey lighten-">
-            <div class="card-content white-text">
-                <span class="card-title"><b>{{p.name}}</b></span>
-                <ul>
-                  <li>Nombre: {{p.name}}</li>
-                  <li>Porcentaje: {{p.minClosingPercentage}}</li>
-                  <li>Fecha de inicio: {{p.startDate}}</li>
-                  <li>Fecha de cierre:{{p.endDate}}</li>
-                </ul>
-            </div>
-            <div class="card-action white">
-              <a class=" blue-text" href="#">Donar</a>
-            </div>
-          </div>
+        <div class="row">
+          <ProjectCard v-for="p in projectsAll" :key="p.id" v-bind:project=p>
+          </ProjectCard>
         </div>
-      </div>
       </div>
     </div>
   </div>
@@ -27,11 +13,13 @@
 
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
+
+import ProjectCard from '.././components/ProjectCard.vue';
+
 import axios from 'axios';
 export default {
 
   name: 'Projects',
-
   data(){
     return {
       cities: null,
@@ -40,7 +28,7 @@ export default {
       projectsAll: []
     }
   },
-  mounted () {
+  mounted(){
     axios.get('https://desapp-back-master.herokuapp.com/api/projects')
       .then(response => {
           this.projectsAll = response.data;
