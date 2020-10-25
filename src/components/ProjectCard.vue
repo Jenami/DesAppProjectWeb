@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class="col s12 m4">
-    <div class="card blue-grey lighten-">
+    <div class="card blue-grey ">
       <div class="card-content white-text">
           <span class="card-title"><b>{{project.name}}</b></span>
           <ul>
@@ -12,7 +12,8 @@
           </ul>
       </div>
       <div class="card-action white">
-        <a class="blue-text" href="#" @click="toggleModal">Donar</a>
+        <button class="btn-large waves-effect blue white-text 
+                waves-light lighten-1" @click="toggleModal" >Donar</button>
       </div>
     </div>
   </div>

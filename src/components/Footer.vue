@@ -1,5 +1,5 @@
 <template>
-  <footer class="page-footer indigo">
+  <footer class="page-footer indigo darken-4">
     <div class="container" id="container90">
       <div class="row center">
           <div class="col l4 s12 ">

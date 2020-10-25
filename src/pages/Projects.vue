@@ -43,7 +43,7 @@ export default {
 
 <style lang="css" scoped>
 #backg{
-  background-image: url("../assets/blue-dots.jpg");
+  background-image: url("../assets/blue-diagonal-stripes.jpg");
   background-repeat:repeat;
   background-size:contain ;
 }

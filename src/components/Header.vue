@@ -1,6 +1,6 @@
 
 <template>
-    <nav class="indigo" role="navigation">
+    <nav class="indigo darken-4" role="navigation">
         <div class="nav-wrapper ">
             <ul class=" left hide-on-med-and-down">
                 <li><router-link to="/">Home</router-link></li>
