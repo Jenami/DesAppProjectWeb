@@ -5,16 +5,16 @@
       <div class="card-content white-text">
           <span class="card-title"><b>{{project.name}}</b></span>
           <ul>
-            <li>Nombre: {{project.name}}</li>
-            <li>Porcentaje: {{project.minClosingPercentage}}</li>
-            <li>Fecha de inicio: {{project.startDate}}</li>
-            <li>Fecha de cierre:{{project.endDate}}</li>
-            <li>Total recaudado:{{project.totalRaised}}</li>
+            <li>{{$t("message.projectName")}}: {{project.name}}</li>
+            <li>{{$t("message.projectPercentage")}}: {{project.minClosingPercentage}}</li>
+            <li>{{$t("message.projectStartDate")}}: {{project.startDate}}</li>
+            <li>{{$t("message.projectEndDate")}}: {{project.endDate}}</li>
+            <li>{{$t("message.projectTotalRaised")}}: {{project.totalRaised}}</li>
           </ul>
       </div>
       <div class="card-action white">
         <button class="btn-large waves-effect blue white-text 
-                waves-light lighten-1" @click="toggleModal" >Donar</button>
+                waves-light lighten-1" @click="toggleModal">{{$t("message.donate")}}</button>
       </div>
     </div>
   </div>
@@ -25,20 +25,20 @@
         <div class="modal-container card blue-grey lighten-">
           <div class="card-title modal-header">
             <slot name="header">
-              Donar al proyecto: "{{project.name}}"
+              {{$t("message.donateTo")}}: "{{project.name}}"
             </slot>
           </div>
           <div class="modal-body">
             <div class="row">
               <slot class='input-field'>
-                <b>Cantidad a donar:</b>
+                <b>{{$t("message.amountToDonate")}}:</b>
                 <input type="decimal" 
                        id="amountToDonate" 
                        class="validate" 
                        v-model="amountToDonate">
                 <br/>
                 <br/>
-                <b>Agrega un comentario:</b>
+                <b>{{$t("message.addAComment")}}:</b>
                 <input type="text" 
                        id="comment" 
                        class="white-text validat" 
@@ -49,8 +49,10 @@
           </div>
           <div>
               <slot name="footer">
-                  <button style="margin-right: 50px" class="btn-large waves-effect blue white-text waves-light lighten-1 " @click="doDonation" >Aceptar</button>
-                  <button class="btn-large waves-effect blue white-text waves-light lighten-1" @click="toggleModal" >Cerrar</button>
+                  <button style="margin-right: 50px" class="btn-large waves-effect blue white-text waves-light lighten-1 " 
+                          @click="doDonation">{{$t("message.accept")}}</button>
+                  <button class="btn-large waves-effect blue white-text waves-light lighten-1" 
+                          @click="toggleModal">{{$t("message.close")}}</button>
               </slot>
           </div>
         </div>

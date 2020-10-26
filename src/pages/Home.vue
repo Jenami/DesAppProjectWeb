@@ -3,12 +3,13 @@
     <div id="principal">
       <div class="container" >
         <br><br>
-        <h2 class="header center white-text">Proyecto Plan Conectar</h2>
+        <h2 class="header center white-text">{{$t("message.titleHome")}}</h2>
         <div class="row center">
-          <h5 class="header col s12 light white-text">Conectividad desde cualquier punto del pais.</h5>
+          <h5 class="header col s12 light white-text">{{$t("message.homePhrase")}}</h5>
         </div>
         <div class="row center">
-          <router-link class="btn-large waves-effect blue white-text waves-light lighten-1" to="/about">Localidades</router-link>
+          <router-link class="btn-large waves-effect blue white-text waves-light lighten-1" to="/projects">
+                {{ $t("message.allProjects") }}</router-link>
         </div>
         <br><br>
       </div>
@@ -19,48 +20,36 @@
         <div class="section">
           <div class="row">
             <div class="col s12 m6 ">
-              <h5 class="card-panel">Proyectos </h5>
+              <h5 class="card-panel"><li>{{ $tc("message.project", 2) }}</li> </h5>
               <ul class="collapsible" v-for="p in projectsNotEnding" :key="p.id">
                   <li>
                     <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
                     <div class="collapsible-body white">
                       <ul>
-                        <li>Nombre: {{p.name}}</li>
-                        <li>Fecha de inicio: {{p.startDate}}</li>
-                        <li>Fecha de fin: {{p.endDate}}</li>
-                        <li>Total recaudado: {{p.totalRaised}}</li>
+                        <li>{{$t("message.projectName")}}: {{p.name}}</li>
+                        <li>{{$t("message.projectStartDate")}}: {{p.startDate}}</li>
+                        <li>{{$t("message.projectEndDate")}}: {{p.endDate}}</li>
+                        <li>{{$t("message.projectTotalRaised")}}: {{p.totalRaised}}</li>
                       </ul>
                     </div>
                 </li>
               </ul>
             </div>
             <div class="col s12 m6">
-              <h5 class="card-panel">Proyectos por cerrar </h5>
+              <h5 class="card-panel">{{ $tc("message.projectClosing", 2) }} </h5>
               <ul class="collapsible" v-for="p in projectsEnding" :key="p.id">
                 <li>
                   <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
                   <div class="collapsible-body white">
                     <ul>
-                      <li>Nombre: {{p.name}}</li>
-                      <li>Fecha de inicio: {{p.startDate}}</li>
-                      <li>Fecha de fin: {{p.endDate}}</li>
-                      <li>Total recaudado: {{p.totalRaised}}</li>
+                      <li>{{ $t("message.projectName") }}: {{p.name}}</li>
+                      <li>{{ $t("message.projectStartDate") }}: {{p.startDate}}</li>
+                      <li>{{ $t("message.projectEndDate") }}: {{p.endDate}}</li>
+                      <li>{{ $t("message.projectTotalRaised") }}: {{p.totalRaised}}</li>
                     </ul>
                   </div>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="section">
-          <div class="row">
-            <div class="col s12 center">
-              <h3><i class="mdi-content-send brown-text"></i></h3>
-              <h4>Test i18n</h4>
-              <p>{{ $t("message.hello") }}</p>
             </div>
           </div>
         </div>

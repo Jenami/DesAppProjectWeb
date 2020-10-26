@@ -4,13 +4,14 @@
       <div class="row center">
           <div class="col l4 s12 ">
             <h5 class="white-text">DesApp</h5>
-            <p class="grey-text text-lighten-4">Proyecto de la materia Desarrollo de Aplicaciones</p>
+            <p class="grey-text text-lighten-4">{{$t("message.desappFooter")}}</p>
           </div>
           
           <div class="col l4 s12">
-            <h5 class="white-text">Pagina de la materia</h5>
+            <h5 class="white-text">{{$t("message.subjectPage")}}</h5>
             <ul>
-                <li><a class="white-text" href="https://sites.google.com/view/unq-desarrollo-de-aplicaciones">Desarrollo de Aplicaciones - UNQ</a></li>
+                <li><a class="white-text" href="https://sites.google.com/view/unq-desarrollo-de-aplicaciones">
+                  {{$t("message.desapp")}} - UNQ</a></li>
             </ul>
           </div>
           

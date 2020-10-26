@@ -4,8 +4,8 @@
         <div class="nav-wrapper ">
             <ul class=" left hide-on-med-and-down">
                 <li><router-link to="/">Home</router-link></li>
-                <li><router-link to="/projects">Proyectos</router-link></li>
-                <li><router-link to="/profile">Perfil</router-link></li>
+                <li><router-link to="/projects">{{ $tc("message.project", 2) }}</router-link></li>
+                <li><router-link to="/profile">{{ $t("message.profile") }}</router-link></li>
             </ul>
      
             <ul class=" right hide-on-med-and-down">
@@ -16,8 +16,8 @@
 
             <ul id="nav-mobile" class=" sidenav">
                 <li><router-link to="/">Home</router-link></li>
-                <li><router-link to="/projects">Proyectos</router-link></li>
-                <li><router-link to="/profile">Perfil</router-link></li>
+                <li><router-link to="/projects">{{ $tc("message.project", 2) }}</router-link></li>
+                <li><router-link to="/profile">{{ $tc("message.profile") }}</router-link></li>
                 
                 <div class="divider"></div>
                 
