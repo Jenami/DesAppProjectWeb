@@ -25,9 +25,10 @@
                     <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
                     <div class="collapsible-body white">
                       <ul>
-                        <li>Nombre:{{p.name}}</li>
-                        <li>Fecha de inicio:{{p.startDate}}</li>
-                        <li>Fecha de fin:{{p.endDate}}</li>
+                        <li>Nombre: {{p.name}}</li>
+                        <li>Fecha de inicio: {{p.startDate}}</li>
+                        <li>Fecha de fin: {{p.endDate}}</li>
+                        <li>Total recaudado: {{p.totalRaised}}</li>
                       </ul>
                     </div>
                 </li>
@@ -40,9 +41,10 @@
                   <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
                   <div class="collapsible-body white">
                     <ul>
-                      <li>Nombre:{{p.name}}</li>
-                      <li>Fecha de inicio:{{p.startDate}}</li>
-                      <li>Fecha de fin:{{p.endDate}}</li>
+                      <li>Nombre: {{p.name}}</li>
+                      <li>Fecha de inicio: {{p.startDate}}</li>
+                      <li>Fecha de fin: {{p.endDate}}</li>
+                      <li>Total recaudado: {{p.totalRaised}}</li>
                     </ul>
                   </div>
                 </li>
@@ -79,22 +81,16 @@ export default {
   ],
   data(){
     return {
-      cities: null,
       projectsEnding: [],
       projectsNotEnding: [],
       projectsAll: []
     }
   },
-  mounted () {
-    axios
-      .get('https://desapp-back-master.herokuapp.com/api/cities')
-      .then(response => this.cities = response.data)
-      .catch(e => console.log('error:'+e));
-    
-    
+  created() {
     axios.get('https://desapp-back-master.herokuapp.com/api/projects')
       .then(response => {
         this.projectsAll = response.data;
+        this.$store.state.projects = this.projectsAll;
         response.data.forEach(
           element => {
             let dateString = element.endDate;
@@ -114,10 +110,7 @@ export default {
       .catch(e => console.log('error:'+e));
   
     axios.get('https://desapp-back-master.herokuapp.com/api/users')
-      .then(response => {
-        this.$store.state.user = response.data[0];
-        console.log('Loaded user');
-      })
+      .then(response => this.$store.state.user = response.data[0])
       .catch(e => console.log('error:'+e));
   },
   updated(){

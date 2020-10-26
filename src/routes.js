@@ -8,6 +8,7 @@ import Profile from './pages/Profile.vue'
 export default [
   { path: '/', component: Home }, 
   { path: '/about', component: HelloWorld},
-  { path: '/profile', component: Profile}, { path: '/projects', component: Projects},
+  { path: '/profile', component: Profile}, 
+  { path: '/projects', component: Projects},
   //{ path: '/projects/id', component: ProjectCard, props: { name: 'attrs' }}
 ]

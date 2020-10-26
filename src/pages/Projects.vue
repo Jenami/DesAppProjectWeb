@@ -3,7 +3,7 @@
     <div class="container">
       <div class="section">
         <div class="row">
-          <ProjectCard v-for="p in projectsAll" :key="p.id" v-bind:project=p>
+          <ProjectCard v-for="p in projectsAll" :key="p.id" v-bind:initialProject=p>
           </ProjectCard>
         </div>
       </div>
@@ -17,23 +17,14 @@
 import ProjectCard from '.././components/ProjectCard.vue';
 
 import axios from 'axios';
+
 export default {
 
   name: 'Projects',
   data(){
     return {
-      cities: null,
-      projectsEnding: [],
-      projectsNotEnding: [],
-      projectsAll: []
+      projectsAll: this.$store.state.projects
     }
-  },
-  mounted(){
-    axios.get('https://desapp-back-master.herokuapp.com/api/projects')
-      .then(response => {
-          this.projectsAll = response.data;
-        })
-      .catch(e => console.log('error:'+e));
   },
   updated(){
         $('.collapsible').collapsible();  

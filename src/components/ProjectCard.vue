@@ -1,6 +1,6 @@
 <template>
   <div>
-  <div class="col s12 m4">
+  <div class="col s12 m6 l4">
     <div class="card blue-grey ">
       <div class="card-content white-text">
           <span class="card-title"><b>{{project.name}}</b></span>
@@ -9,6 +9,7 @@
             <li>Porcentaje: {{project.minClosingPercentage}}</li>
             <li>Fecha de inicio: {{project.startDate}}</li>
             <li>Fecha de cierre:{{project.endDate}}</li>
+            <li>Total recaudado:{{project.totalRaised}}</li>
           </ul>
       </div>
       <div class="card-action white">
@@ -18,28 +19,29 @@
     </div>
   </div>
   <template class="modal" v-if="showModal">
+    <div class="container">
     <div class="modal-mask">
-
       <div class="modal-wrapper card-content white-text">
         <div class="modal-container card blue-grey lighten-">
           <div class="card-title modal-header">
             <slot name="header">
-              Realizar donacion
+              Donar al proyecto: "{{project.name}}"
             </slot>
           </div>
           <div class="modal-body">
             <div class="row">
               <slot class='input-field'>
-                Cantidad a donar:
+                <b>Cantidad a donar:</b>
                 <input type="decimal" 
                        id="amountToDonate" 
                        class="validate" 
                        v-model="amountToDonate">
                 <br/>
-                Agrega un comentario:
+                <br/>
+                <b>Agrega un comentario:</b>
                 <input type="text" 
                        id="comment" 
-                       class="validate" 
+                       class="white-text validat" 
                        v-model="comment">
                 
               </slot>
@@ -47,13 +49,14 @@
           </div>
           <div>
               <slot name="footer">
-                  <button class="btn-large waves-effect blue white-text waves-light lighten-1 " @click="doDonation" >Aceptar</button>
+                  <button style="margin-right: 50px" class="btn-large waves-effect blue white-text waves-light lighten-1 " @click="doDonation" >Aceptar</button>
                   <button class="btn-large waves-effect blue white-text waves-light lighten-1" @click="toggleModal" >Cerrar</button>
               </slot>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </template>
 </div>
 </template>
@@ -64,17 +67,21 @@ import axios from 'axios';
 
 export default {
   name: 'ProjectCard',
-  props: ['project'],
+  props: ['initialProject'],
   data(){
     return {
       showModal: false,
       amountToDonate: 0,
-      comment: ""
+      comment: "",
+      project: this.initialProject
     }
   },
   methods:{
     toggleModal(){
       this.showModal = !this.showModal;
+    },
+    updateProject(newProject){
+      this.project = newProject;
     },
     doDonation(){
       const userId = this.$store.state.user.id;
@@ -101,10 +108,31 @@ export default {
       }
 
       axios.post('https://desapp-back-master.herokuapp.com/api/donate', newDonation, requestParamsDonate)
-      .then(response => this.$store.state.user = response.data)
-      .catch(e => console.log('error:'+e));
-      
-    }
+           .then(response => {
+             this.toggleModal();
+             this.$store.state.user = response.data;
+             const updatedproject = this.$store.state.user.projectsDonatedTo.filter(p => p.id == projectId)[0];
+             this.updateProject(updatedproject);
+             this.$toasted.show('Donacion realizada', {
+               type: 'success',
+               duration: 3000,
+               icon: {
+                 name: 'check'
+               }
+             });
+           })
+           .catch(e => {
+             this.toggleModal();
+             this.$toasted.show('Ocurrio un problema, intente nuevamente', {
+               icon: {
+                 name: 'close'
+               },
+               type: 'error',
+               duration: 3000,
+             });
+             console.log('error:'+e);
+           });
+         }
   }
 }
 </script>
