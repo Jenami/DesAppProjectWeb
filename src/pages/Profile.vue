@@ -14,9 +14,9 @@
           <div class="collapsible-header"><i class="material-icons">web</i>{{d.donationDate}}</div>
           <div class="collapsible-body white">
             <ul>
-              <li>{{$t("message.amount")}}:{{d.amount}}</li>
-              <li>{{$t("message.comment")}}:{{d.comment}}</li>
-              <li>{{$t("message.date")}}:{{d.donationDate}}</li>
+              <li>{{$t("message.amount")}}: ${{d.amount}}</li>
+              <li>{{$t("message.comment")}}: {{d.comment}}</li>
+              <li>{{$t("message.date")}}: {{d.donationDate}}</li>
             </ul>
           </div>
         </li>
@@ -33,9 +33,8 @@
   export default {
     name: "Profile",
     data(){
-      return {
-        
-      user: this.$store.state.user === null ? this.loadData() : this.$store.state.user
+      return {    
+        user: this.$store.state.user === null ? this.loadData() : this.$store.state.user
       }
     },
     mounted(){

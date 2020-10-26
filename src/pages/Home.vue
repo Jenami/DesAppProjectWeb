@@ -20,7 +20,7 @@
         <div class="section">
           <div class="row">
             <div class="col s12 m6 ">
-              <h5 class="card-panel"><li>{{ $tc("message.project", 2) }}</li> </h5>
+              <h5 class="card-panel"> {{ $tc("message.project", 2) }} </h5>
               <ul class="collapsible" v-for="p in projectsNotEnding" :key="p.id">
                   <li>
                     <div class="collapsible-header"><i class="material-icons">web</i>{{p.name}}</div>
@@ -29,7 +29,7 @@
                         <li>{{$t("message.projectName")}}: {{p.name}}</li>
                         <li>{{$t("message.projectStartDate")}}: {{p.startDate}}</li>
                         <li>{{$t("message.projectEndDate")}}: {{p.endDate}}</li>
-                        <li>{{$t("message.projectTotalRaised")}}: {{p.totalRaised}}</li>
+                        <li>{{$t("message.projectTotalRaised")}}: ${{p.totalRaised}}</li>
                       </ul>
                     </div>
                 </li>
@@ -45,7 +45,7 @@
                       <li>{{ $t("message.projectName") }}: {{p.name}}</li>
                       <li>{{ $t("message.projectStartDate") }}: {{p.startDate}}</li>
                       <li>{{ $t("message.projectEndDate") }}: {{p.endDate}}</li>
-                      <li>{{ $t("message.projectTotalRaised") }}: {{p.totalRaised}}</li>
+                      <li>{{ $t("message.projectTotalRaised") }}: ${{p.totalRaised}}</li>
                     </ul>
                   </div>
                 </li>

@@ -6,10 +6,10 @@
           <span class="card-title"><b>{{project.name}}</b></span>
           <ul>
             <li>{{$t("message.projectName")}}: {{project.name}}</li>
-            <li>{{$t("message.projectPercentage")}}: {{project.minClosingPercentage}}</li>
+            <li>{{$t("message.projectPercentage")}}: {{project.minClosingPercentage}}%</li>
             <li>{{$t("message.projectStartDate")}}: {{project.startDate}}</li>
             <li>{{$t("message.projectEndDate")}}: {{project.endDate}}</li>
-            <li>{{$t("message.projectTotalRaised")}}: {{project.totalRaised}}</li>
+            <li>{{$t("message.projectTotalRaised")}}: ${{project.totalRaised}}</li>
           </ul>
       </div>
       <div class="card-action white">
