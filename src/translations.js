@@ -29,7 +29,9 @@ export default {
             amount: 'Amount',
             comment: 'Comment',
             date: 'Date',
-            points: 'Points'
+            points: 'Points',
+            donationMade: 'Donation made successfully!',
+            donationError: 'There was a problem, please try again'
 
         }
     },
@@ -63,7 +65,9 @@ export default {
             amount: 'Cantidad',
             comment: 'Comentario',
             date: 'Fecha',
-            points: 'Puntos'
+            points: 'Puntos',
+            donationMade: 'Donacion realizada exitosamente!',
+            donationError: 'Ocurrio un problema, intente nuevamente'
         }
     }
 }

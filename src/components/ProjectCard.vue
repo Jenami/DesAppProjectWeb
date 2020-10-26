@@ -115,7 +115,7 @@ export default {
              this.$store.state.user = response.data;
              const updatedproject = this.$store.state.user.projectsDonatedTo.filter(p => p.id == projectId)[0];
              this.updateProject(updatedproject);
-             this.$toasted.show('Donacion realizada', {
+             this.$toasted.show(this.$t("message.donationMade"), {
                type: 'success',
                duration: 3000,
                icon: {
@@ -125,7 +125,7 @@ export default {
            })
            .catch(e => {
              this.toggleModal();
-             this.$toasted.show('Ocurrio un problema, intente nuevamente', {
+             this.$toasted.show(this.$t("message.donationError"), {
                icon: {
                  name: 'close'
                },
