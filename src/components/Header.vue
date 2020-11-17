@@ -10,6 +10,10 @@
      
             <ul class=" right hide-on-med-and-down">
                 <li><a href="#">Login</a></li>
+                <li v-if="!$auth.loading">
+                  <a v-if="!$auth.isAuthenticated" @click="login">Log in Auth</a>
+                  <a v-if="$auth.isAuthenticated" @click="logout">Log out Auth</a>
+                </li>
                 <li><a @click="changeLang('es')">ES</a></li>
                 <li><a @click="changeLang('en')">EN</a></li>
             </ul>
@@ -37,12 +41,25 @@ export default {
     data(){
         return { langs: ['es', 'en'] }
     },
+    updated(){
+        if(this.$auth.isAuthenticated){
+            console.table(this.$auth.user);
+        }
+    },
     methods:{
         changeLang(locale){ 
             console.log('locale:'+locale)
             if (this.$i18n.locale !== locale) {
                 this.$i18n.locale = locale;
             }
+        },
+        login() {
+          this.$auth.loginWithRedirect();
+        },
+        logout() {
+          this.$auth.logout({
+            returnTo: window.location.origin
+          });
         }
     }
 }

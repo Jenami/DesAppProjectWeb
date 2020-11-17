@@ -7,10 +7,27 @@ import store from './store';
 import ProjectCard from './components/ProjectCard.vue';
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import { domain, clientId } from "./auth_config.json";
+import { Auth0Plugin } from "./auth";
+
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
 Vue.use(Toasted);
+
+Vue.use(Auth0Plugin, {
+  domain,
+  clientId,
+  onRedirectCallback: appState => {
+    router.push(
+      appState && appState.targetUrl
+        ? appState.targetUrl
+        : window.location.pathname
+    );
+  }
+});
+
+Vue.config.productionTip = false;
 
 Vue.component('ProjectCard', ProjectCard);
 Vue.component('Header', Header);

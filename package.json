@@ -9,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.13.3",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "express": "^4.17.1",
