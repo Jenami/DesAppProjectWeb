@@ -10,6 +10,11 @@ import Footer from './components/Footer.vue';
 import { domain, clientId } from "./auth_config.json";
 import { Auth0Plugin } from "./auth";
 
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+
+import 'vue-select/dist/vue-select.css';
 
 Vue.use(VueRouter);
 Vue.use(VueI18n);
