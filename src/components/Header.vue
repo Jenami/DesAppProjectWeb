@@ -42,8 +42,8 @@ export default {
         return { langs: ['es', 'en'] }
     },
     updated(){
-        if(this.$auth.isAuthenticated){
-            console.table(this.$auth.user);
+        if(this.$auth.isAuthenticated && this.$store.state.authUser == null){
+            this.$root.$emit('loadAuthUser');
         }
     },
     methods:{

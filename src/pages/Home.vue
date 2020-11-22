@@ -14,6 +14,58 @@
         <br><br>
       </div>
     </div>
+
+  <div v-if="showSpinner" class="container">
+    <div class="modal-mask">
+      <div class="modal-wrapper card-content white-text">
+        <div class="modal-container card blue-grey lighten-">
+          <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
     <div class="grey lighten-3" >
       <div class="container">
         <div class="section">
@@ -67,8 +119,22 @@ export default {
   props: [
     'msg'
   ],
+  mounted() {
+    this.$root.$on('loadAuthUser', () => {
+      this.toggleSpinner();
+      this.$store.state.authUser = this.$auth.user;
+      const userMail = this.$auth.user.email;      
+      axios.get('https://desapp-back-master.herokuapp.com/api/user?userMail=' + userMail)
+           .then(response => {
+              this.$store.state.user = response.data;
+              this.toggleSpinner();
+           })
+           .catch(e => console.log(e));
+    })
+  },
   data(){
     return {
+      showSpinner: false,
       projectsEnding: [],
       projectsNotEnding: [],
       projectsAll: []
@@ -96,15 +162,14 @@ export default {
           });
       })
       .catch(e => console.log('error:'+e));
-  
-    axios.get('https://desapp-back-master.herokuapp.com/api/users')
-      .then(response => this.$store.state.user = response.data[0])
-      .catch(e => console.log('error:'+e));
   },
   updated(){
         $('.collapsible').collapsible();
   },
   methods:{
+    toggleSpinner(){
+      this.showSpinner = !this.showSpinner;
+    },
     goHome() {
       this.$router.push('/');
     },
