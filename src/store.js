@@ -4,7 +4,8 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: {authUser: null,
+  state: {
+    authUser: null,
     user: null,
     projects: []
   }

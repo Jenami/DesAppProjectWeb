@@ -14,7 +14,6 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
 
-import ProjectCard from '.././components/ProjectCard.vue';
 
 import axios from 'axios';
 

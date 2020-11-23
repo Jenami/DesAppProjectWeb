@@ -15,56 +15,13 @@
       </div>
     </div>
 
-  <div v-if="showSpinner" class="container">
-    <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container" style="opacity: 0.9">
-          <div class="preloader-wrapper big active">
-          <div class="spinner-layer spinner-blue">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
-
-          <div class="spinner-layer spinner-red">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
-
-          <div class="spinner-layer spinner-yellow">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
-
-          <div class="spinner-layer spinner-green">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
+    <div v-if="showSpinner" class="container">
+      <ColorSpinner />
     </div>
-  </div>
 
+    <div v-if="showLogin" class="container" >
+      <RegisterForm />
+    </div>
 
     <div class="grey lighten-3" >
       <div class="container">
@@ -113,12 +70,22 @@
 <script>
 
 import axios from 'axios';
+import ColorSpinner from './test/ColorSpinner.vue';
+
+import RegisterForm from './test/RegisterForm.vue';
 
 export default {
-  name: 'FirstPage',
-  props: [
-    'msg'
-  ],
+  components: { ColorSpinner, RegisterForm },
+  name: 'Home',
+  data(){
+    return {
+      showSpinner: false,
+      showLogin: false,
+      projectsEnding: [],
+      projectsNotEnding: [],
+      projectsAll: []
+    }
+  },
   mounted() {
     this.$root.$on('loadAuthUser', () => {
       this.toggleSpinner();
@@ -128,22 +95,33 @@ export default {
            .then(response => {
               this.$store.state.user = response.data;
               this.toggleSpinner();
+              this.redirectUser();
            })
            .catch(e => {
             if(e.response.status === 404){
-              this.$router.push('/creation');
+              
+              this.toggleSpinner();
+              this.showLogin = true
+              
             }
           });
     })
+
+    this.$root.$on('userRegistered', () => {
+      console.log('event POST received')
+      this.showLogin = false
+      this.redirectUser()
+    })
+
+    /* TODO BORRAR
+    this.$root.$on('test', () => {
+      console.log('event TEST received')
+      this.showLogin = false
+    })*/
+    
   },
-  data(){
-    return {
-      showSpinner: false,
-      projectsEnding: [],
-      projectsNotEnding: [],
-      projectsAll: []
-    }
-  },
+ 
+  
   created() {
     axios.get('https://desapp-back-master.herokuapp.com/api/projects')
       .then(response => {
@@ -177,8 +155,15 @@ export default {
     goHome() {
       this.$router.push('/');
     },
-    goAbout() {
-      this.$router.push('/about');
+
+    redirectUser(){
+      if(this.$store.state.user.profile === 'ADMIN'){
+        
+        this.$router.push('/creation');
+      }
+      else{
+         this.$router.push('/');
+      }
     }
   }
 }

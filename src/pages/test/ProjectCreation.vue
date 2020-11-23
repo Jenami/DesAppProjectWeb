@@ -2,6 +2,8 @@
     <div class="container">
         <br/>
         <div class="row">
+            
+
                 <div id="register">
                     <h3>Ciudad para proyecto</h3>
                     <slot class='input-field'>
@@ -88,9 +90,8 @@
                         <br/>
                     </div>
                 </div>
-
+        </div>
         
-            </div>
     </div>
 </template>
 
@@ -117,10 +118,17 @@ export default {
 
         city: null,
         citiesAll: [],
-        citiesMap : {}
+        citiesMap : {},
+
+        projectsAll : null 
     }
   },
+  mounted(){
+      this.projectsAll = this.$store.state.projects 
+      console.log('all on mounted:'+ this.$store.state.projects)
+  },
     created(){
+        console.log('all:'+ this.$store.state.projects)
             axios.get('https://desapp-back-master.herokuapp.com/api/cities/projectless')
                 .then(response => {
                     console.table(response.data)
