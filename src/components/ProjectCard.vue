@@ -10,11 +10,18 @@
             <li>{{$t("message.projectStartDate")}}: {{project.startDate}}</li>
             <li>{{$t("message.projectEndDate")}}: {{project.endDate}}</li>
             <li>{{$t("message.projectTotalRaised")}}: ${{project.totalRaised}}</li>
+            <li>{{$t("message.status")}}: {{projectStatus}}</li>
           </ul>
       </div>
       <div class="card-action white">
-        <button class="btn-large waves-effect blue white-text 
+        <div v-if="canBeClosedByUser">
+          <button class="btn-large waves-effect blue white-text waves-light lighten-1"
+                  @click="closeProject">{{$t("message.close")}}</button>
+        </div>
+        <div v-if="canBeDonatedByUser">
+          <button class="btn-large waves-effect blue white-text 
                 waves-light lighten-1" @click="toggleModal">{{$t("message.donate")}}</button>
+        </div>
       </div>
     </div>
   </div>
@@ -71,12 +78,26 @@ export default {
   name: 'ProjectCard',
   props: ['initialProject'],
   data(){
+    let defaultProject = this.initialProject;
     return {
       showModal: false,
       amountToDonate: 0,
       comment: "",
-      project: this.initialProject
+      project: defaultProject,
+      canBeClosedByUser: this.$store.state.user !== null && 
+                         this.$store.state.user.profile === 'ADMIN' &&
+                         defaultProject !== null &&
+                         !defaultProject.isClosed,
+      canBeDonatedByUser: (this.$store.state.user == null ||
+                          (this.$store.state.user !== null && 
+                           this.$store.state.user.profile === 'DONOR')) &&
+                           defaultProject !== null &&
+                           !defaultProject.isClosed,
+      projectStatus: defaultProject.isClosed ? this.$t("message.projectClosed") : this.$t("message.projectOpen")
     }
+  },
+  updated(){
+    this.projectStatus = this.project.isClosed ? this.$t("message.projectClosed") : this.$t("message.projectOpen")
   },
   methods:{
     toggleModal(){
@@ -84,6 +105,41 @@ export default {
     },
     updateProject(newProject){
       this.project = newProject;
+
+    },
+    closeProject(){
+      const userId = this.$store.state.user.id;
+      const projectId = this.project.id;
+
+      const requestParamsClose = {
+        params: {
+          userId,
+          projectId
+        }
+      }
+
+      axios.post('https://desapp-back-master.herokuapp.com/api/project/close', {}, requestParamsClose)
+           .then(response => {
+             this.updateProject(response.data);
+             this.canBeClosedByUser = false;
+             this.$toasted.show(this.$t("message.closeProjectMade"), {
+               type: 'success',
+               duration: 3000,
+               icon: {
+                 name: 'check'
+               }
+             });
+           })
+           .catch(e => {
+             this.$toasted.show(this.$t("message.callbackError"), {
+               icon: {
+                 name: 'close'
+               },
+               type: 'error',
+               duration: 3000,
+             });
+             console.log('error:'+e);
+           });
     },
     doDonation(){
       const userId = this.$store.state.user.id;
@@ -125,7 +181,7 @@ export default {
            })
            .catch(e => {
              this.toggleModal();
-             this.$toasted.show(this.$t("message.donationError"), {
+             this.$toasted.show(this.$t("message.callbackError"), {
                icon: {
                  name: 'close'
                },

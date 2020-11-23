@@ -10,6 +10,8 @@ export default {
             projectStartDate: 'Start date',
             projectEndDate: 'End date',
             projectTotalRaised: 'Total raised',
+            projectClosed: 'Closed',
+            projectOpen: 'Active',
             titleHome: 'Plan Conectar Project',
             profile: 'Profile',
             donate: 'Donate',
@@ -18,6 +20,7 @@ export default {
             addAComment: 'Add a comment',
             close: 'Close',
             accept: 'Accept',
+            status: 'Status',
 
             subjectPage: 'Subject webpage',
             desappFooter: 'Subject `Applications development` project',
@@ -31,7 +34,8 @@ export default {
             date: 'Date',
             points: 'Points',
             donationMade: 'Donation made successfully!',
-            donationError: 'There was a problem, please try again'
+            callbackError: 'There was a problem, please try again',
+            closeProjectMade: 'Poject closed successfully!'
 
         }
     },
@@ -46,6 +50,8 @@ export default {
             projectStartDate: 'Fecha de Inicio',
             projectEndDate: 'Fecha de Fin',
             projectTotalRaised: 'Total recaudado',
+            projectClosed: 'Cerrado',
+            projectOpen: 'Activo',
             titleHome: 'Proyecto Plan Conectar',
             profile: 'Perfil',
             donate: 'Donar',
@@ -54,6 +60,7 @@ export default {
             addAComment: 'Agregar un comentario',
             close: 'Cerrar',
             accept: 'Aceptar',
+            status: 'Estado',
 
             subjectPage: 'Subject webpage',
             desappFooter: 'Proyecto de la materia desarrollo de Aplicaciones',
@@ -67,7 +74,8 @@ export default {
             date: 'Fecha',
             points: 'Puntos',
             donationMade: 'Donacion realizada exitosamente!',
-            donationError: 'Ocurrio un problema, intente nuevamente'
+            callbackError: 'Ocurrio un problema, intente nuevamente',
+            closeProjectMade: 'Poject cerrado exitosamente!'
         }
     }
 }
