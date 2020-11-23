@@ -17,8 +17,8 @@
 
   <div v-if="showSpinner" class="container">
     <div class="modal-mask">
-      <div class="modal-wrapper card-content white-text">
-        <div class="modal-container card blue-grey lighten-">
+      <div class="modal-wrapper">
+        <div class="modal-container" style="opacity: 0.9">
           <div class="preloader-wrapper big active">
           <div class="spinner-layer spinner-blue">
             <div class="circle-clipper left">
@@ -129,7 +129,11 @@ export default {
               this.$store.state.user = response.data;
               this.toggleSpinner();
            })
-           .catch(e => console.log(e));
+           .catch(e => {
+            if(e.response.status === 404){
+              this.$router.push('/creation');
+            }
+          });
     })
   },
   data(){
@@ -187,5 +191,62 @@ export default {
   background-repeat:no-repeat;
 }
 
+.modal-mask {
+  border-radius: 25px;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+  vertical-align: middle;
+}
 
+.modal-wrapper {
+  display: table-cell;
+  margin: 0 auto;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #FFFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  vertical-align: middle;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.preloader-wrapper {
+   vertical-align: middle;
+   opacity: 1;
+}
 </style>
