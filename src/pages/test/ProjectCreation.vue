@@ -3,30 +3,30 @@
         <br/>
         <div class="row">
                 <div id="register">
-                    <h3>Ciudad para proyecto</h3>
+                    <h3>{{$t("message.cityForProject")}}</h3>
                     <slot class='input-field'>
-                        <b>Nombre de la ciudad:</b>
+                        <b>{{$t("message.projectCityName")}}:</b>
                         <input type="text" 
                                 id="nombreCiudad" 
                                 class="validate" 
                                 v-model="nombreCiudad">
                         <br/>
                         <br/>
-                        <b>Poblacion:</b>
+                        <b>{{$t("message.projectCityPopulation")}}:</b>
                         <input type="number" 
                                 id="poblacion" 
                                 class="validate" 
                                 v-model="poblacion">
                         <br/>
                         <br/>
-                        <b>Provincia:</b>
+                        <b>{{$t("message.projectCityProvince")}}:</b>
                         <input type="text" 
                                 id="provincia" 
                                 class="validate" 
                                 v-model="provincia">
                         <br/>
                         <br/>
-                        <b>Conectividad:</b>
+                        <b>{{$t("message.projectCityConnectivity")}}:</b>
                         <input type="text" 
                                 id="conectividad" 
                                 class="validate" 
@@ -42,9 +42,9 @@
                         <br/>
                     </div>
                     <br/>
-                    <h3>Datos del proyecto</h3>
+                    <h3>{{$t("message.projectData")}}</h3>
                     <slot class='input-field'>
-                        <b>Nombre :</b>
+                        <b>{{$t("message.projectName")}} :</b>
                         <input type="text" 
                                 id="pName" 
                                 class="validate" 
@@ -52,7 +52,7 @@
                                 v-model="pName">
                         <br/>
                         <br/>
-                        <b>Fecha inicio:</b>
+                        <b>{{$t("message.projectStartDate")}}:</b>
                         <input type="date" 
                                 id="pStartDate" 
                                 class="validate" 
@@ -60,7 +60,7 @@
                                 v-model="pStartDate">
                         <br/>
                         <br/>
-                        <b>Fecha fin:</b>
+                        <b>{{$t("message.projectEndDate")}}:</b>
                         <input type="date" 
                                 id="pEndDate" 
                                 class="validate" 
@@ -68,14 +68,14 @@
                                 v-model="pEndDate">
                         <br/>
                         <br/>
-                        <b>Procentaje minimo:</b>
+                        <b>{{$t("message.projectMinPercentage")}}:</b>
                         <input type="text" 
                                 id="porcentaje" 
                                 class="validate" 
                                 v-model="porcentaje">
                         <br/>
                         <br/>
-                        <b>Ciudad:</b>
+                        <b>{{$tc("message.city", 1)}}:</b>
                         <multiselect :options="citiesAll" v-model="selected"/>
                         <br/>
                     </slot>
@@ -120,14 +120,10 @@ export default {
   },
   mounted(){
       this.projectsAll = this.$store.state.projects 
-      console.log('all on mounted:'+ this.$store.state.projects)
   },
     created(){
-        console.log('all:'+ this.$store.state.projects)
             axios.get('https://desapp-back-master.herokuapp.com/api/cities/projectless')
                 .then(response => {
-                    console.table(response.data)
-                    console.log('cities:'+response.data)
                     var i;
 
                     for (i = 0; i < response.data.length; i++) {
@@ -139,7 +135,6 @@ export default {
                     //para select con objetos
                     //this.citiesAll = response.data
 
-                    console.log('citiesAll:'+ this.citiesAll)
                 })
                 .catch(e => {
                     this.$toasted.show('error cities', {
@@ -153,7 +148,7 @@ export default {
         },
     methods:{
         createCity(){
-            const userId = "2"//$this.store.state.user.id;
+            const userId = this.$store.state.user.id 
             let cityData = {
                 connectivityStatus: this.conectividad, name: this.nombreCiudad, 
                 population: this.poblacion, province: this.provincia 
@@ -165,8 +160,14 @@ export default {
             }
             axios.post('https://desapp-back-master.herokuapp.com/api/city', cityData, params)
                 .then(function (response) {
-                    console.log('city post:'+response.data)
-                    //intentando actualizar/refrescar el listado de ciudades sin project
+                    this.$toasted.show('City creation succesful', {
+                            icon: {
+                                name: 'check'
+                            },
+                            type: 'sucess',
+                            duration: 3000,
+                        })
+                    //para actualizar/refrescar el listado de ciudades sin project
                     //this.$store.state.citiesLess.push(response.data)
                     }.bind(this)
                     )
@@ -182,14 +183,9 @@ export default {
         },
 
         createProject(){
-            const userId = "2"//$this.store.state.user.id;
-            console.log('userId:'+ userId)
-
+            const userId = this.$store.state.user.id 
             
-            console.log('selected:'+ this.selected)
             const cityId = this.citiesMap[this.selected];
-            console.log('cityId:'+ cityId)
-
 
             let project = {
                 name: this.pName, 
@@ -204,12 +200,19 @@ export default {
             }
             axios.post('https://desapp-back-master.herokuapp.com/api/project/create', project, params)
                 .then(function (response) {
-                    console.log('project:'+response.data)
+                    this.$toasted.show('Project creation succesful', {
+                            icon: {
+                                name: 'check'
+                            },
+                            type: 'sucess',
+                            duration: 3000,
+                        })
 
                     //intentando actualizar/refrescar el listado de ciudades sin project
                     //var city = this.$store.state.citiesLessMap.get(citiId)
                     //this.$store.state.citiesLess = newCityList
                     }.bind(this)
+
                 )
                 .catch(e => {
                     this.$toasted.show('error login', {

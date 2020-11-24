@@ -34,64 +34,78 @@
         <div v-if="canBeDonatedByUser">
           <a href="#" class="activator green-text">{{$t("message.seeMore")}}<i class="material-icons left">more_vert</i></a>
           <br/><br/>
-          <button class="btn-large waves-effect blue white-text 
+          
+          <div class="center">
+          <button class=" btn-large waves-effect blue white-text 
                 waves-light lighten-1" @click="toggleModal">{{$t("message.donate")}}</button>
+          </div>
+          <br/>
+          <div class="center">
+            <a href="#" class="btn-large waves-effect teal white-text waves-light lighten-1" 
+              @click="seeDonations">{{$tc("message.donation", 2)}}</a>
+          </div>
+          
         </div>
       </div>
     </div>
   </div>
   <template class="modal" v-if="showModal">
     <div class="container">
-    <div class="modal-mask">
-      <div class="modal-wrapper card-content white-text">
-        <div class="modal-container card blue-grey lighten-">
-          <div class="card-title modal-header">
-            <slot name="header">
-              {{$t("message.donateTo")}}: "{{project.name}}"
-            </slot>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <slot class='input-field'>
-                <b>{{$t("message.amountToDonate")}}:</b>
-                <input type="decimal" 
-                       id="amountToDonate" 
-                       class="validate" 
-                       v-model="amountToDonate">
-                <br/>
-                <br/>
-                <b>{{$t("message.addAComment")}}:</b>
-                <input type="text" 
-                       id="comment" 
-                       class="white-text validat" 
-                       v-model="comment">
-                
+      <div class="modal-mask">
+        <div class="modal-wrapper card-content white-text">
+          <div class="modal-container card blue-grey lighten-">
+            <div class="card-title modal-header">
+              <slot name="header">
+                {{$t("message.donateTo")}}: "{{project.name}}"
               </slot>
             </div>
-          </div>
-          <div>
+            <div class="modal-body">
+              <div class="row">
+                <slot class='input-field'>
+                  <b>{{$t("message.amountToDonate")}}:</b>
+                  <input type="decimal" 
+                        id="amountToDonate" 
+                        class="validate" 
+                        v-model="amountToDonate">
+                  <br/>
+                  <br/>
+                  <b>{{$t("message.addAComment")}}:</b>
+                  <input type="text" 
+                        id="comment" 
+                        class="white-text validat" 
+                        v-model="comment">
+                  
+                </slot>
+              </div>
+            </div>
+            <div>
               <slot name="footer">
                   <button style="margin-right: 50px" class="btn-large waves-effect blue white-text waves-light lighten-1 " 
                           @click="doDonation">{{$t("message.accept")}}</button>
                   <button class="btn-large waves-effect blue white-text waves-light lighten-1" 
                           @click="toggleModal">{{$t("message.close")}}</button>
               </slot>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </template>
+  <div v-if="showDonationsModal" class="container">
+    <DonationsListModal v-bind:donations=project.donationsRegistered></DonationsListModal>
+  </div>
 </div>
 </template>
 
 <script>
 
 import axios from 'axios';
+import DonationsListModal from '../pages/test/DonationsListModal.vue'
 
 export default {
   name: 'ProjectCard',
   props: ['initialProject'],
+  components:{DonationsListModal},
   data(){
     let defaultProject = this.initialProject;
     return {
@@ -109,9 +123,15 @@ export default {
                            defaultProject !== null &&
                            !defaultProject.isClosed,
       projectStatus: defaultProject.isClosed ? this.$t("message.projectClosed") : this.$t("message.projectOpen"),
-      actualPercentage: Math.ceil((this.initialProject.totalRaised * 100 ) / this.initialProject.totalCost)
-    
+      actualPercentage: Math.ceil((this.initialProject.totalRaised * 100 ) / this.initialProject.totalCost),
+      showDonationsModal: false
     }
+  },
+  mounted(){
+    this.$root.$on('closeDonationsModal', () => {
+          
+        this.showDonationsModal = false
+        })
   },
   updated(){
     this.projectStatus = this.project.isClosed ? this.$t("message.projectClosed") : this.$t("message.projectOpen")
@@ -207,7 +227,10 @@ export default {
              });
              console.log('error:'+e);
            });
-         }
+    },
+    seeDonations(){
+      this.showDonationsModal = true
+    }
   }
 }
 </script>

@@ -108,17 +108,9 @@ export default {
     })
 
     this.$root.$on('userRegistered', () => {
-      console.log('event POST received')
       this.showLogin = false
       this.redirectUser()
-    })
-
-    /* TODO BORRAR
-    this.$root.$on('test', () => {
-      console.log('event TEST received')
-      this.showLogin = false
-    })*/
-    
+    })    
   },
  
   

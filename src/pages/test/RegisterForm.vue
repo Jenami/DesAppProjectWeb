@@ -72,32 +72,8 @@ export default {
   },
   methods:{
 
-        /*acceptLogin(){
-            const userdata = {
-                params:{
-                    userMail: this.loginemail, userName: this.loginusername, userPass: this.loginpassword
-                    }
-                };
-            axios.post('https://desapp-back-master.herokuapp.com/api/login', {}, userdata)
-                .then(function (response) {
-                    console.log('pepita here:'+response.data)
-                    this.$store.state.user = response.data
-                    this.$router.push({path: '/profile', user: this.$store.state.user} );
-                    }.bind(this)
-                    )
-                .catch(e => {
-                    this.$toasted.show('error login', {
-                        icon: {
-                            name: 'close'
-                        },
-                        type: 'error',
-                        duration: 3000,
-                    });
-                    console.log('error:'+e)});
-        },*/
-
         acceptRegister(){
-            const gisdata = {
+            const userdata = {
                 params:{
                     userMail: this.$store.state.authUser.email, 
                     userName: this.registerusername, 
@@ -107,13 +83,18 @@ export default {
                     userNickName: this.registernick
                     }
                 };
-                console.table(gisdata.params);
-                axios.post('https://desapp-back-master.herokuapp.com/api/register', {}, gisdata)
+                axios.post('https://desapp-back-master.herokuapp.com/api/register', {}, userdata)
                     .then(response => {
-                        console.log('gister here:'+response.data)
                         this.$store.state.user = response.data
                         this.$root.$emit('userRegistered');
                         }).bind(this)
+                        this.$toasted.show('Register succesful', {
+                            icon: {
+                                name: 'check'
+                            },
+                            type: 'sucess',
+                            duration: 3000,
+                        })
                     .catch(e => {
                         this.$toasted.show('error register', {
                             icon: {
@@ -131,41 +112,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.tabs .tab a {
-  color: rgba(11, 77, 153, 0.7) !important;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0 24px;
-  font-size: 14px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  -webkit-transition: color .28s ease, background-color .28s ease;
-  transition: color .28s ease, background-color .28s ease;
-}
 
-.tabs .tab a:hover, .tabs .tab a.active {
-  background-color: transparent;
-  color: #6eaaee !important;
-}
-.tabs .tab a:focus, .tabs .tab a:focus.active {
-  background-color: rgba(178, 210, 246, 0.2) !important;
-  outline: none;
-}
-
-.tabs .tab.disabled a,
-.tabs .tab.disabled a:hover {
-  color: rgba(133, 110, 238, 0.4) !important;
-  cursor: default;
-}
-
-.tabs .indicator {
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  background-color: #2fb14b !important;
-  will-change: left, right;
-}
 
 
 .modal-mask {

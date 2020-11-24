@@ -14,7 +14,7 @@ export default {
             projectTotalCost: 'Total cost',
             projectClosed: 'Closed',
             projectOpen: 'Active',
-            titleHome: 'Plan Conectar Project',
+            titleHome: 'ConectAR Project',
             profile: 'Profile',
             donate: 'Donate',
             donateTo: 'Donate to',
@@ -28,6 +28,7 @@ export default {
             projectCityProvince: 'Province',
             projectCityPopulation: 'Population',
             projectCityConnectivity: 'Connectivity',
+            cityForProject: 'City for project',
 
             subjectPage: 'Subject webpage',
             desappFooter: 'Subject `Applications development` project',
@@ -42,7 +43,13 @@ export default {
             points: 'Points',
             donationMade: 'Donation made successfully!',
             callbackError: 'There was a problem, please try again',
-            closeProjectMade: 'Poject closed successfully!'
+            closeProjectMade: 'Project closed successfully!',
+
+            login: 'LogIn',
+            logout: 'LogOut',
+            
+            projectCreation: 'Create Project',
+            projectData: 'Project Data'
 
         }
     },
@@ -61,7 +68,7 @@ export default {
             projectTotalCost: 'Coste total',
             projectClosed: 'Cerrado',
             projectOpen: 'Activo',
-            titleHome: 'Proyecto Plan Conectar',
+            titleHome: 'Proyecto ConectAR',
             profile: 'Perfil',
             donate: 'Donar',
             donateTo: 'Donar a',
@@ -75,8 +82,9 @@ export default {
             projectCityProvince: 'Provincia',
             projectCityPopulation: 'Poblacion',
             projectCityConnectivity: 'Conectividad',
+            cityForProject: 'Localidad para el proyecto',
 
-            subjectPage: 'Subject webpage',
+            subjectPage: 'Pagina de la materia',
             desappFooter: 'Proyecto de la materia desarrollo de Aplicaciones',
             desapp: 'Desarrollo de Aplicaciones',
 
@@ -89,7 +97,13 @@ export default {
             points: 'Puntos',
             donationMade: 'Donacion realizada exitosamente!',
             callbackError: 'Ocurrio un problema, intente nuevamente',
-            closeProjectMade: 'Poject cerrado exitosamente!'
+            closeProjectMade: 'Proyecto cerrado exitosamente!',
+
+            login: 'Iniciar sesion',
+            logout: 'Cerrar sesion',
+            
+            projectCreation: 'Crear Proyecto',
+            projectData: 'Datos del proyecto'
         }
     }
 }
