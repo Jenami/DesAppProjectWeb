@@ -1,24 +1,39 @@
 <template>
   <div>
   <div class="col s12 m6 l4">
-    <div class="card blue-grey ">
+    <div class="card blue-grey lighten-2 ">
       <div class="card-content white-text">
-          <span class="card-title"><b>{{project.name}}</b></span>
+          <span class="card-title activator"><b>{{project.name}}</b></span>
           <ul>
             <li>{{$t("message.projectName")}}: {{project.name}}</li>
-            <li>{{$t("message.projectPercentage")}}: {{project.minClosingPercentage}}%</li>
+            <li>{{$t("message.projectMinPercentage")}}: {{project.minClosingPercentage}}%</li>
             <li>{{$t("message.projectStartDate")}}: {{project.startDate}}</li>
             <li>{{$t("message.projectEndDate")}}: {{project.endDate}}</li>
             <li>{{$t("message.projectTotalRaised")}}: ${{project.totalRaised}}</li>
+            <li>{{$t("message.projectTotalCost")}}: ${{project.totalCost}}</li>
+            <li>{{$t("message.projectRaisedPercentage")}}: {{actualPercentage}}%</li>
             <li>{{$t("message.status")}}: {{projectStatus}}</li>
           </ul>
       </div>
+       <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">{{$tc("message.city", 1)}}<i class="material-icons right">close</i></span>
+          
+          <ul>
+              <li>{{$t("message.projectCityName")}}: {{project.city.name}}</li>
+              <li>{{$t("message.projectCityProvince")}}: {{project.city.province}}</li>
+              <li>{{$t("message.projectCityPopulation")}}: {{project.city.population}}</li>
+              <li>{{$t("message.projectCityConnectivity")}}: {{project.city.connectivityStatus}}</li>
+          </ul>
+          
+        </div>
       <div class="card-action white">
         <div v-if="canBeClosedByUser">
           <button class="btn-large waves-effect blue white-text waves-light lighten-1"
                   @click="closeProject">{{$t("message.close")}}</button>
         </div>
         <div v-if="canBeDonatedByUser">
+          <a href="#" class="activator green-text">{{$t("message.seeMore")}}<i class="material-icons left">more_vert</i></a>
+          <br/><br/>
           <button class="btn-large waves-effect blue white-text 
                 waves-light lighten-1" @click="toggleModal">{{$t("message.donate")}}</button>
         </div>
@@ -93,7 +108,9 @@ export default {
                            this.$store.state.user.profile === 'DONOR')) &&
                            defaultProject !== null &&
                            !defaultProject.isClosed,
-      projectStatus: defaultProject.isClosed ? this.$t("message.projectClosed") : this.$t("message.projectOpen")
+      projectStatus: defaultProject.isClosed ? this.$t("message.projectClosed") : this.$t("message.projectOpen"),
+      actualPercentage: Math.ceil((this.initialProject.totalRaised * 100 ) / this.initialProject.totalCost)
+    
     }
   },
   updated(){

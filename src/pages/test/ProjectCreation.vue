@@ -2,8 +2,6 @@
     <div class="container">
         <br/>
         <div class="row">
-            
-
                 <div id="register">
                     <h3>Ciudad para proyecto</h3>
                     <slot class='input-field'>
@@ -78,20 +76,17 @@
                         <br/>
                         <br/>
                         <b>Ciudad:</b>
-                        <v-select :options="citiesAll" v-model="selected"></v-select>
+                        <multiselect :options="citiesAll" v-model="selected"/>
                         <br/>
-                     
-                       
                     </slot>
                     <div class="footer center">
                         <button style="margin-right: 50px" class="btn-large waves-effect blue white-text waves-light lighten-1 " 
                                 @click="createProject">{{$t("message.accept")}}</button>
                         
-                        <br/>
-                    </div>
+                    <br/>
                 </div>
+            </div>
         </div>
-        
     </div>
 </template>
 
