@@ -169,6 +169,7 @@ export default {
                         })
                     //para actualizar/refrescar el listado de ciudades sin project
                     //this.$store.state.citiesLess.push(response.data)
+                    this.citiesAll.push(response.data.name + " - " + response.data.province);
                     }.bind(this)
                     )
                 .catch(e => {
@@ -211,6 +212,7 @@ export default {
                     //intentando actualizar/refrescar el listado de ciudades sin project
                     //var city = this.$store.state.citiesLessMap.get(citiId)
                     //this.$store.state.citiesLess = newCityList
+                    this.$store.state.projects.push(response.data);
                     }.bind(this)
 
                 )

@@ -149,13 +149,7 @@ export default {
     },
 
     redirectUser(){
-      if(this.$store.state.user.profile === 'ADMIN'){
-        
-        this.$router.push('/creation');
-      }
-      else{
-         this.$router.push('/');
-      }
+      this.$router.push('/');
     }
   }
 }
