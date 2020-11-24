@@ -167,7 +167,7 @@ export default {
                }
              });
              axios.get('https://desapp-back-master.herokuapp.com/api/email/closeProject?projectId=' + projectId)
-                  .then(response => {
+                  .then(() => {
                     this.$toasted.show(this.$t("message.emailCloseSent"), {
                        type: 'success',
                        duration: 3000,
