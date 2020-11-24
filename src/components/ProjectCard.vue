@@ -166,6 +166,26 @@ export default {
                  name: 'check'
                }
              });
+             axios.get('https://desapp-back-master.herokuapp.com/api/email/closeProject?projectId=' + projectId)
+                  .then(response => {
+                    this.$toasted.show(this.$t("message.emailCloseSent"), {
+                       type: 'success',
+                       duration: 3000,
+                       icon: {
+                         name: 'check'
+                       }
+                     });
+                  })
+                  .catch(e => {
+                    this.$toasted.show(this.$t("message.callbackError"), {
+                       icon: {
+                         name: 'close'
+                       },
+                       type: 'error',
+                       duration: 3000,
+                     });
+                    console.log(e)}
+                    );
            })
            .catch(e => {
              this.$toasted.show(this.$t("message.callbackError"), {

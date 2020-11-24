@@ -49,7 +49,9 @@ export default {
             logout: 'LogOut',
             
             projectCreation: 'Create Project',
-            projectData: 'Project Data'
+            projectData: 'Project Data',
+
+            emailCloseSent: 'Users notified'
 
         }
     },
@@ -103,7 +105,9 @@ export default {
             logout: 'Cerrar sesion',
             
             projectCreation: 'Crear Proyecto',
-            projectData: 'Datos del proyecto'
+            projectData: 'Datos del proyecto',
+
+            emailCloseSent: 'Usuarios notificados'
         }
     }
 }
