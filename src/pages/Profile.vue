@@ -34,7 +34,7 @@
     name: "Profile",
     data(){
       return {    
-        user: this.$store.state.user === null ? this.loadData() : this.$store.state.user
+        user: this.$store.state.user
       }
     },
     mounted(){
@@ -42,16 +42,6 @@
     },
     updated(){
       $('.collapsible').collapsible();
-    },
-    methods:{
-      loadData(){
-        axios.get('https://desapp-back-master.herokuapp.com/api/users')
-             .then(response => {
-               this.user = response.data[0];
-               this.$store.state.user = this.user;  
-             })
-             .catch(e => console.log('error:'+e));
-      }
     }
   };
 </script>

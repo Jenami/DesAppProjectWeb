@@ -14,7 +14,15 @@
         <br><br>
       </div>
     </div>
-    
+
+    <div v-if="showSpinner" class="container">
+      <ColorSpinner />
+    </div>
+
+    <div v-if="showLogin" class="container" >
+      <RegisterForm />
+    </div>
+
     <div class="grey lighten-3" >
       <div class="container">
         <div class="section">
@@ -62,19 +70,50 @@
 <script>
 
 import axios from 'axios';
+import ColorSpinner from './test/ColorSpinner.vue';
+
+import RegisterForm from './test/RegisterForm.vue';
 
 export default {
-  name: 'FirstPage',
-  props: [
-    'msg'
-  ],
+  components: { ColorSpinner, RegisterForm },
+  name: 'Home',
   data(){
     return {
+      showSpinner: false,
+      showLogin: false,
       projectsEnding: [],
       projectsNotEnding: [],
       projectsAll: []
     }
   },
+  mounted() {
+    this.$root.$on('loadAuthUser', () => {
+      this.toggleSpinner();
+      this.$store.state.authUser = this.$auth.user;
+      const userMail = this.$auth.user.email;      
+      axios.get('https://desapp-back-master.herokuapp.com/api/user?userMail=' + userMail)
+           .then(response => {
+              this.$store.state.user = response.data;
+              this.toggleSpinner();
+              this.redirectUser();
+           })
+           .catch(e => {
+            if(e.response.status === 404){
+              
+              this.toggleSpinner();
+              this.showLogin = true
+              
+            }
+          });
+    })
+
+    this.$root.$on('userRegistered', () => {
+      this.showLogin = false
+      this.redirectUser()
+    })    
+  },
+ 
+  
   created() {
     axios.get('https://desapp-back-master.herokuapp.com/api/projects')
       .then(response => {
@@ -97,20 +136,20 @@ export default {
           });
       })
       .catch(e => console.log('error:'+e));
-  
-    axios.get('https://desapp-back-master.herokuapp.com/api/users')
-      .then(response => this.$store.state.user = response.data[0])
-      .catch(e => console.log('error:'+e));
   },
   updated(){
         $('.collapsible').collapsible();
   },
   methods:{
+    toggleSpinner(){
+      this.showSpinner = !this.showSpinner;
+    },
     goHome() {
       this.$router.push('/');
     },
-    goAbout() {
-      this.$router.push('/about');
+
+    redirectUser(){
+      this.$router.push('/');
     }
   }
 }
@@ -123,5 +162,62 @@ export default {
   background-repeat:no-repeat;
 }
 
+.modal-mask {
+  border-radius: 25px;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+  vertical-align: middle;
+}
 
+.modal-wrapper {
+  display: table-cell;
+  margin: 0 auto;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #FFFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  vertical-align: middle;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.preloader-wrapper {
+   vertical-align: middle;
+   opacity: 1;
+}
 </style>
