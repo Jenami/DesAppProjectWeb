@@ -131,10 +131,6 @@ export default {
                         this.citiesMap[dato] = response.data[i].id
                     }
                     this.citiesAll = Object.keys(this.citiesMap)
-                    
-                    //para select con objetos
-                    //this.citiesAll = response.data
-
                 })
                 .catch(e => {
                     this.$toasted.show('error cities', {
@@ -167,9 +163,9 @@ export default {
                             type: 'sucess',
                             duration: 3000,
                         })
-                    //para actualizar/refrescar el listado de ciudades sin project
-                    //this.$store.state.citiesLess.push(response.data)
-                    this.citiesAll.push(response.data.name + " - " + response.data.province);
+                    var dato = response.data.name + " - " + response.data.province;
+                    this.citiesMap[dato] = response.data.id
+                    this.citiesAll.push(dato);
                     }.bind(this)
                     )
                 .catch(e => {
@@ -208,10 +204,6 @@ export default {
                             type: 'sucess',
                             duration: 3000,
                         })
-
-                    //intentando actualizar/refrescar el listado de ciudades sin project
-                    //var city = this.$store.state.citiesLessMap.get(citiId)
-                    //this.$store.state.citiesLess = newCityList
                     this.$store.state.projects.push(response.data);
                     }.bind(this)
 
