@@ -4,7 +4,7 @@
       <div class="section">
         <div class="row">
           <div class="col s12 m6 l3">
-              Cantidad por pagina:
+              {{$t("message.amountPerPage")}}:
                 <multiselect  v-model="selected" 
                 :options="options" 
                 :searchable="false" 

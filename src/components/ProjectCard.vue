@@ -138,7 +138,18 @@ export default {
   },
   methods:{
     toggleModal(){
-      this.showModal = !this.showModal;
+      if(this.$store.state.user !== null){
+        this.showModal = !this.showModal;
+      }
+      else{
+        this.$toasted.show(this.$t("message.pleaseLogin"), {
+               type: 'info',
+               duration: 3000,
+               icon: {
+                 name: 'info'
+               }
+          });
+      }
     },
     updateProject(newProject){
       this.project = newProject;
