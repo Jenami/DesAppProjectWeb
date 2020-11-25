@@ -51,7 +51,10 @@ export default {
             projectCreation: 'Create Project',
             projectData: 'Project Data',
 
-            emailCloseSent: 'Users notified'
+            emailCloseSent: 'Users notified',
+
+            amountPerPage: 'Amount per page',
+            pleaseLogin: 'Please LogIn to donate'
 
         }
     },
@@ -107,7 +110,10 @@ export default {
             projectCreation: 'Crear Proyecto',
             projectData: 'Datos del proyecto',
 
-            emailCloseSent: 'Usuarios notificados'
+            emailCloseSent: 'Usuarios notificados',
+            
+            amountPerPage: 'Cantidad por pagina',
+            pleaseLogin: 'Por favor inicie sesion para donar'
         }
     }
 }
